@@ -8,7 +8,13 @@ function multiply(num1, num2) {
   return num1 * num2;
 }
 function divide(num1, num2) {
-  return num1 / num2;
+  let answer = num1 / num2;
+
+  if (answer % 1 !== 0) {
+    return answer.toFixed(7);
+  } else {
+    return answer;
+  }
 }
 
 let num1 = "";
@@ -57,7 +63,7 @@ buttons.forEach((button) => {
         button.addEventListener("click", () => {
           if (num2 == "" || num2 == null) {
             num1 = calDisplay.textContent;
-            num1 = parseInt(num1);
+            num1 = parseFloat(num1);
             operator = add;
             isNum2 = true;
             isNewNumber = true;
@@ -68,6 +74,63 @@ buttons.forEach((button) => {
             num2 = "";
             isComplete = true;
             operator = add;
+          }
+        });
+        break;
+
+      case "-":
+        button.addEventListener("click", () => {
+          if (num2 == "" || num2 == null) {
+            num1 = calDisplay.textContent;
+            num1 = parseFloat(num1);
+            operator = subtract;
+            isNum2 = true;
+            isNewNumber = true;
+          } else {
+            let answer = operate(operator, num1, num2);
+            calDisplay.textContent = answer;
+            num1 = answer;
+            num2 = "";
+            isComplete = true;
+            operator = subtract;
+          }
+        });
+        break;
+
+      case "×":
+        button.addEventListener("click", () => {
+          if (num2 == "" || num2 == null) {
+            num1 = calDisplay.textContent;
+            num1 = parseFloat(num1);
+            operator = multiply;
+            isNum2 = true;
+            isNewNumber = true;
+          } else {
+            let answer = operate(operator, num1, num2);
+            calDisplay.textContent = answer;
+            num1 = answer;
+            num2 = "";
+            isComplete = true;
+            operator = multiply;
+          }
+        });
+        break;
+
+      case "÷":
+        button.addEventListener("click", () => {
+          if (num2 == "" || num2 == null) {
+            num1 = calDisplay.textContent;
+            num1 = parseFloat(num1);
+            operator = divide;
+            isNum2 = true;
+            isNewNumber = true;
+          } else {
+            let answer = operate(operator, num1, num2);
+            calDisplay.textContent = answer;
+            num1 = answer;
+            num2 = "";
+            isComplete = true;
+            operator = divide;
           }
         });
         break;
@@ -84,5 +147,16 @@ buttons.forEach((button) => {
       isNum2 = false;
       isComplete = true;
     });
+    // AC Button
+  } else if (button.textContent === "AC") {
+    button.addEventListener("click", () => {
+      calDisplay.textContent = "";
+      num1 = "";
+      num2 = "";
+      operator = "";
+      isNum2 = false;
+    });
+  } else if (button.textContent === "DEL") {
+    button.addEventListener("click", () => {});
   }
 });
