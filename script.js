@@ -74,83 +74,76 @@ buttons.forEach((button) => {
     switch (button.textContent) {
       case "+":
         button.addEventListener("click", () => {
-          if (num2 == "" || num2 == null) {
-            num1 = calDisplay.textContent;
-            num1 = parseFloat(num1);
-            operator = add;
-            isNum2 = true;
-            isComplete = true;
-          } else {
+          if (num1 === "" || num1 === null) {
+            num1 = parseFloat(calDisplay.textContent) || 0;
+          } else if (num2 !== "" || num2 !== 0) {
             let answer = operate(operator, num1, num2);
             calDisplay.textContent = answer;
-            num1 = answer;
+            num1 = parseFloat(answer);
             num2 = "";
-            isComplete = true;
             operator = add;
           }
+
+          operator = add;
+          isNum2 = true;
+          isComplete = true;
         });
         break;
 
       case "-":
         button.addEventListener("click", () => {
-          if (num2 == "" || num2 == null) {
-            num1 = calDisplay.textContent;
-            num1 = parseFloat(num1);
-            operator = subtract;
-            isNum2 = true;
-            isComplete = true;
-          } else {
+          if (num1 === "" || num1 === null) {
+            num1 = parseFloat(calDisplay.textContent) || 0;
+          } else if (num2 !== "" || num2 !== 0) {
             let answer = operate(operator, num1, num2);
             calDisplay.textContent = answer;
-            num1 = answer;
+            num1 = parseFloat(answer);
             num2 = "";
-            isComplete = true;
             operator = subtract;
           }
+
+          operator = subtract;
+          isNum2 = true;
+          isComplete = true;
         });
         break;
 
       case "×":
         button.addEventListener("click", () => {
-          if (num2 == "" || num2 == null) {
-            num1 = calDisplay.textContent;
-            num1 = parseFloat(num1);
-            operator = multiply;
-            isNum2 = true;
-            isComplete = true;
-          } else {
+          if (num1 === "" || num1 === null) {
+            num1 = parseFloat(calDisplay.textContent) || 0;
+          } else if (num2 !== "" || num2 !== 0) {
             let answer = operate(operator, num1, num2);
             calDisplay.textContent = answer;
-            num1 = answer;
+            num1 = parseFloat(answer);
             num2 = "";
-            isComplete = true;
             operator = multiply;
           }
+
+          operator = multiply;
+          isNum2 = true;
+          isComplete = true;
         });
         break;
 
       case "÷":
         button.addEventListener("click", () => {
-          if (num2 === 0) {
-            calDisplay.textContent = `IDioT`;
-            num1 = "";
-            num2 = "";
-            operator = "";
-            isComplete = true;
-            isNum2 = false;
-          }
-          if (num2 == "" || num2 == null) {
-            num1 = calDisplay.textContent;
-            num1 = parseFloat(num1);
+          if (num1 === "" || num1 === null) {
+            num1 = parseFloat(calDisplay.textContent) || 0;
             operator = divide;
             isNum2 = true;
             isComplete = true;
-          } else {
-            let answer = operate(operator, num1, num2);
-            calDisplay.textContent = answer;
-            num1 = answer;
+          } else if (num2 === 0) {
+            calDisplay.textContent = `IdioT`;
+            num1 = "";
             num2 = "";
             isComplete = true;
+            isNum2 = false;
+          } else if (num2 !== "" || num2 !== 0) {
+            let answer = operate(operator, num1, num2);
+            calDisplay.textContent = answer;
+            num1 = parseFloat(answer);
+            num2 = "";
             operator = divide;
           }
         });
@@ -160,8 +153,10 @@ buttons.forEach((button) => {
   // = button
   else if (button.textContent === "=") {
     button.addEventListener("click", () => {
-      if (operator === divide && num2 === 0) {
-        calDisplay.textContent = `IDioT`;
+      if (num1 === "" || num2 === "") {
+        console.log(`Error`);
+      } else if (operator === divide && num2 === 0) {
+        calDisplay.textContent = `IdioT`;
         num1 = "";
         num2 = "";
         operator = "";
