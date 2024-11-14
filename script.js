@@ -34,12 +34,6 @@ function checkDecimal(answer, decimal) {
   }
 }
 
-let number = add(1, 2.333467221234111);
-console.log(number);
-let decimal = getDecimalPlaces(number);
-console.log(decimal);
-console.log(checkDecimal(number, decimal));
-
 let num1 = "";
 let num2 = "";
 let operator = "";
@@ -65,10 +59,6 @@ buttons.forEach((button) => {
         calDisplay.textContent = "";
         isComplete = false;
       }
-      if (isNewNumber) {
-        calDisplay.textContent = "";
-        isNewNumber = false;
-      }
 
       if (isNum2) {
         calDisplay.textContent += button.textContent;
@@ -89,7 +79,7 @@ buttons.forEach((button) => {
             num1 = parseFloat(num1);
             operator = add;
             isNum2 = true;
-            isNewNumber = true;
+            isComplete = true;
           } else {
             let answer = operate(operator, num1, num2);
             calDisplay.textContent = answer;
@@ -108,7 +98,7 @@ buttons.forEach((button) => {
             num1 = parseFloat(num1);
             operator = subtract;
             isNum2 = true;
-            isNewNumber = true;
+            isComplete = true;
           } else {
             let answer = operate(operator, num1, num2);
             calDisplay.textContent = answer;
@@ -127,7 +117,7 @@ buttons.forEach((button) => {
             num1 = parseFloat(num1);
             operator = multiply;
             isNum2 = true;
-            isNewNumber = true;
+            isComplete = true;
           } else {
             let answer = operate(operator, num1, num2);
             calDisplay.textContent = answer;
@@ -154,7 +144,7 @@ buttons.forEach((button) => {
             num1 = parseFloat(num1);
             operator = divide;
             isNum2 = true;
-            isNewNumber = true;
+            isComplete = true;
           } else {
             let answer = operate(operator, num1, num2);
             calDisplay.textContent = answer;
