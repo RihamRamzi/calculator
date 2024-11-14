@@ -1,21 +1,44 @@
 function add(num1, num2) {
-  return num1 + num2;
+  let answer = num1 + num2;
+  let decimal = getDecimalPlaces(answer);
+
+  return checkDecimal(answer, decimal);
 }
 function subtract(num1, num2) {
-  return num1 - num2;
+  let answer = num1 - num2;
+  let decimal = getDecimalPlaces(answer);
+
+  return checkDecimal(answer, decimal);
 }
 function multiply(num1, num2) {
-  return num1 * num2;
+  let answer = num1 * num2;
+  let decimal = getDecimalPlaces(answer);
+
+  return checkDecimal(answer, decimal);
 }
 function divide(num1, num2) {
   let answer = num1 / num2;
+  let decimal = getDecimalPlaces(answer);
 
-  if (answer % 1 !== 0) {
-    return answer.toFixed(7);
+  return checkDecimal(answer, decimal);
+}
+//functions to get decimal value and check it
+function getDecimalPlaces(num) {
+  return num.toString().split(".")[1]?.length || 0;
+}
+function checkDecimal(answer, decimal) {
+  if (decimal > 8) {
+    return answer.toFixed(8);
   } else {
     return answer;
   }
 }
+
+let number = add(1, 2.333467221234111);
+console.log(number);
+let decimal = getDecimalPlaces(number);
+console.log(decimal);
+console.log(checkDecimal(number, decimal));
 
 let num1 = "";
 let num2 = "";
@@ -50,7 +73,7 @@ buttons.forEach((button) => {
       if (isNum2) {
         calDisplay.textContent += button.textContent;
         num2 = calDisplay.textContent;
-        num2 = parseInt(num2);
+        num2 = parseFloat(num2);
       } else {
         calDisplay.textContent += button.textContent;
       }
