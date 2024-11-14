@@ -47,8 +47,6 @@ buttons.forEach((button) => {
         num2 = parseInt(num2);
       } else {
         calDisplay.textContent += button.textContent;
-        num1 = calDisplay.textContent;
-        num1 = parseInt(num1);
       }
     });
   }
@@ -58,6 +56,8 @@ buttons.forEach((button) => {
       case "+":
         button.addEventListener("click", () => {
           if (num2 == "" || num2 == null) {
+            num1 = calDisplay.textContent;
+            num1 = parseInt(num1);
             operator = add;
             isNum2 = true;
             isNewNumber = true;
@@ -72,5 +72,17 @@ buttons.forEach((button) => {
         });
         break;
     }
+  }
+  // = button
+  else if (button.textContent === "=") {
+    button.addEventListener("click", () => {
+      let answer = operate(operator, num1, num2);
+      calDisplay.textContent = answer;
+      num1 = "";
+      num2 = "";
+      operator = "";
+      isNum2 = false;
+      isComplete = true;
+    });
   }
 });
