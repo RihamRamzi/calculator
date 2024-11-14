@@ -16,6 +16,7 @@ let num2 = "";
 let operator = "";
 let isNum2 = false;
 let isComplete = false;
+let isNewNumber = false;
 
 function operate(operator, num1, num2) {
   return operator(num1, num2);
@@ -35,33 +36,41 @@ buttons.forEach((button) => {
         calDisplay.textContent = "";
         isComplete = false;
       }
+      if (isNewNumber) {
+        calDisplay.textContent = "";
+        isNewNumber = false;
+      }
 
       if (isNum2) {
         calDisplay.textContent += button.textContent;
         num2 = calDisplay.textContent;
+        num2 = parseInt(num2);
       } else {
         calDisplay.textContent += button.textContent;
         num1 = calDisplay.textContent;
+        num1 = parseInt(num1);
       }
     });
-  } else if (operators.includes(button.textContent)) {
-    //operators
-    if (button.textContent === "+") {
-      button.addEventListener("click", () => {
-        if (isNum2) {
-          num1 = parseInt(num1);
-          num2 = parseInt(num2);
-          let answer = operate(operator, num1, num2);
-          calDisplay.textContent = answer;
-          num1 = answer;
-          num2 = 0;
-          isComplete = true;
-        } else {
-          operator = add;
-          calDisplay.textContent = "";
-          isNum2 = true;
-        }
-      });
+  }
+  //operators
+  else if (operators.includes(button.textContent)) {
+    switch (button.textContent) {
+      case "+":
+        button.addEventListener("click", () => {
+          if (num2 == "" || num2 == null) {
+            operator = add;
+            isNum2 = true;
+            isNewNumber = true;
+          } else {
+            let answer = operate(operator, num1, num2);
+            calDisplay.textContent = answer;
+            num1 = answer;
+            num2 = "";
+            isComplete = true;
+            operator = add;
+          }
+        });
+        break;
     }
   }
 });
