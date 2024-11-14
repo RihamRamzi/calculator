@@ -50,3 +50,10 @@ button:hover {
   padding-right: 25px;
   margin-bottom: 10px;
 }
+
+#AC {
+  width: 150px;
+}
+.operator {
+  font-size: 40px;
+}
