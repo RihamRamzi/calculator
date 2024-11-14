@@ -33,13 +33,27 @@ function checkDecimal(answer, decimal) {
     return answer;
   }
 }
+//Highlight button
+function highlightBtn(button) {
+  if (currentHighlightedBtn) {
+    currentHighlightedBtn.classList.remove("highlighted");
+  }
+
+  button.classList.add("highlighted");
+  currentHighlightedBtn = button;
+}
+function removeHighlightedBtn() {
+  if (currentHighlightedBtn) {
+    currentHighlightedBtn.classList.remove("highlighted");
+  }
+}
 
 let num1 = "";
 let num2 = "";
 let operator = "";
 let isNum2 = false;
 let isComplete = false;
-let isNewNumber = false;
+let currentHighlightedBtn = null;
 
 function operate(operator, num1, num2) {
   return operator(num1, num2);
@@ -74,6 +88,8 @@ buttons.forEach((button) => {
     switch (button.textContent) {
       case "+":
         button.addEventListener("click", () => {
+          highlightBtn(button);
+
           if (num1 === "" || num1 === null) {
             num1 = parseFloat(calDisplay.textContent) || 0;
           } else if (num2 !== "" || num2 !== 0) {
@@ -92,6 +108,8 @@ buttons.forEach((button) => {
 
       case "-":
         button.addEventListener("click", () => {
+          highlightBtn(button);
+
           if (num1 === "" || num1 === null) {
             num1 = parseFloat(calDisplay.textContent) || 0;
           } else if (num2 !== "" || num2 !== 0) {
@@ -110,6 +128,8 @@ buttons.forEach((button) => {
 
       case "×":
         button.addEventListener("click", () => {
+          highlightBtn(button);
+
           if (num1 === "" || num1 === null) {
             num1 = parseFloat(calDisplay.textContent) || 0;
           } else if (num2 !== "" || num2 !== 0) {
@@ -128,6 +148,8 @@ buttons.forEach((button) => {
 
       case "÷":
         button.addEventListener("click", () => {
+          highlightBtn(button);
+
           if (num1 === "" || num1 === null) {
             num1 = parseFloat(calDisplay.textContent) || 0;
             operator = divide;
@@ -153,6 +175,8 @@ buttons.forEach((button) => {
   // = button
   else if (button.textContent === "=") {
     button.addEventListener("click", () => {
+      removeHighlightedBtn();
+
       if (num1 === "" || num2 === "") {
         console.log(`Error`);
       } else if (operator === divide && num2 === 0) {
@@ -175,6 +199,7 @@ buttons.forEach((button) => {
     // AC Button
   } else if (button.textContent === "AC") {
     button.addEventListener("click", () => {
+      removeHighlightedBtn();
       calDisplay.textContent = "";
       num1 = "";
       num2 = "";
