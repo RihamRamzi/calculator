@@ -158,5 +158,14 @@ buttons.forEach((button) => {
     });
   } else if (button.textContent === "DEL") {
     button.addEventListener("click", () => {});
+  } // . button
+  else {
+    button.addEventListener("click", () => {
+      if (calDisplay.textContent.includes(".")) {
+        button.disabled;
+      } else {
+        calDisplay.textContent += button.textContent;
+      }
+    });
   }
 });
