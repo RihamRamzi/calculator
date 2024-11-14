@@ -118,6 +118,14 @@ buttons.forEach((button) => {
 
       case "÷":
         button.addEventListener("click", () => {
+          if (num2 === 0) {
+            calDisplay.textContent = `IDioT`;
+            num1 = "";
+            num2 = "";
+            operator = "";
+            isComplete = true;
+            isNum2 = false;
+          }
           if (num2 == "" || num2 == null) {
             num1 = calDisplay.textContent;
             num1 = parseFloat(num1);
@@ -139,13 +147,22 @@ buttons.forEach((button) => {
   // = button
   else if (button.textContent === "=") {
     button.addEventListener("click", () => {
-      let answer = operate(operator, num1, num2);
-      calDisplay.textContent = answer;
-      num1 = "";
-      num2 = "";
-      operator = "";
-      isNum2 = false;
-      isComplete = true;
+      if (operator === divide && num2 === 0) {
+        calDisplay.textContent = `IDioT`;
+        num1 = "";
+        num2 = "";
+        operator = "";
+        isComplete = true;
+        isNum2 = false;
+      } else {
+        let answer = operate(operator, num1, num2);
+        calDisplay.textContent = answer;
+        num1 = "";
+        num2 = "";
+        operator = "";
+        isNum2 = false;
+        isComplete = true;
+      }
     });
     // AC Button
   } else if (button.textContent === "AC") {
