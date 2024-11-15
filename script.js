@@ -77,7 +77,6 @@ buttons.forEach((button) => {
       if (isNum2) {
         calDisplay.textContent += button.textContent;
         num2 = calDisplay.textContent;
-        num2 = parseFloat(num2);
       } else {
         calDisplay.textContent += button.textContent;
       }
@@ -93,6 +92,7 @@ buttons.forEach((button) => {
           if (num1 === "" || num1 === null) {
             num1 = parseFloat(calDisplay.textContent) || 0;
           } else if (num2 !== "" || num2 !== 0) {
+            num2 = parseFloat(num2);
             let answer = operate(operator, num1, num2);
             calDisplay.textContent = answer;
             num1 = parseFloat(answer);
@@ -113,6 +113,7 @@ buttons.forEach((button) => {
           if (num1 === "" || num1 === null) {
             num1 = parseFloat(calDisplay.textContent) || 0;
           } else if (num2 !== "" || num2 !== 0) {
+            num2 = parseFloat(num2);
             let answer = operate(operator, num1, num2);
             calDisplay.textContent = answer;
             num1 = parseFloat(answer);
@@ -133,6 +134,7 @@ buttons.forEach((button) => {
           if (num1 === "" || num1 === null) {
             num1 = parseFloat(calDisplay.textContent) || 0;
           } else if (num2 !== "" || num2 !== 0) {
+            num2 = parseFloat(num2);
             let answer = operate(operator, num1, num2);
             calDisplay.textContent = answer;
             num1 = parseFloat(answer);
@@ -155,13 +157,14 @@ buttons.forEach((button) => {
             operator = divide;
             isNum2 = true;
             isComplete = true;
-          } else if (num2 === 0) {
+          } else if (num2 === "0") {
             calDisplay.textContent = `IdioT`;
             num1 = "";
             num2 = "";
             isComplete = true;
             isNum2 = false;
           } else if (num2 !== "" || num2 !== 0) {
+            num2 = parseFloat(num2);
             let answer = operate(operator, num1, num2);
             calDisplay.textContent = answer;
             num1 = parseFloat(answer);
@@ -179,7 +182,7 @@ buttons.forEach((button) => {
 
       if (num1 === "" || num2 === "") {
         console.log(`Error`);
-      } else if (operator === divide && num2 === 0) {
+      } else if (operator === divide && num2 === "0") {
         calDisplay.textContent = `IdioT`;
         num1 = "";
         num2 = "";
@@ -187,6 +190,7 @@ buttons.forEach((button) => {
         isComplete = true;
         isNum2 = false;
       } else {
+        num2 = parseFloat(num2);
         let answer = operate(operator, num1, num2);
         calDisplay.textContent = answer;
         num1 = "";
@@ -208,10 +212,16 @@ buttons.forEach((button) => {
     });
   } else if (button.textContent === "DEL") {
     button.addEventListener("click", () => {
-      let number = calDisplay.textContent;
-      let newNum = number.slice(0, -1);
-      calDisplay.textContent = newNum;
-      console.log(newNum);
+      if (isNum2) {
+        console.log(num2);
+
+        num2 = num2.slice(0, -1);
+        calDisplay.textContent = num2;
+      }
+      // let number = calDisplay.textContent;
+      // let newNum = number.slice(0, -1);
+      // calDisplay.textContent = newNum;
+      // console.log(newNum);
     });
   } // . button
   else {
