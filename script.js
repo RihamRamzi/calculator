@@ -207,7 +207,12 @@ buttons.forEach((button) => {
       isNum2 = false;
     });
   } else if (button.textContent === "DEL") {
-    button.addEventListener("click", () => {});
+    button.addEventListener("click", () => {
+      let number = calDisplay.textContent;
+      let newNum = number.slice(0, -1);
+      calDisplay.textContent = newNum;
+      console.log(newNum);
+    });
   } // . button
   else {
     button.addEventListener("click", () => {
