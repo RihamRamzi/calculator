@@ -236,18 +236,12 @@ buttons.forEach((button) => {
   } else if (button.textContent === "DEL") {
     button.addEventListener("click", () => {
       if (isNum2) {
-        console.log(num2);
-
         num2 = num2.slice(0, -1);
         calDisplay.textContent = num2;
       } else {
         currentIndex = currentIndex.slice(0, -1);
         calDisplay.textContent = currentIndex;
       }
-      // let number = calDisplay.textContent;
-      // let newNum = number.slice(0, -1);
-      // calDisplay.textContent = newNum;
-      // console.log(newNum);
     });
   } // . button
   else {
