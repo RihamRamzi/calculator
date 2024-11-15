@@ -54,6 +54,7 @@ let operator = "";
 let isNum2 = false;
 let isComplete = false;
 let currentHighlightedBtn = null;
+let currentIndex = "";
 
 function operate(operator, num1, num2) {
   return operator(num1, num2);
@@ -79,6 +80,7 @@ buttons.forEach((button) => {
         num2 = calDisplay.textContent;
       } else {
         calDisplay.textContent += button.textContent;
+        currentIndex = calDisplay.textContent;
       }
     });
   }
@@ -90,11 +92,16 @@ buttons.forEach((button) => {
           highlightBtn(button);
 
           if (num1 === "" || num1 === null) {
-            num1 = parseFloat(calDisplay.textContent) || 0;
+            num1 = parseFloat(currentIndex) || 0;
+          } else if (num2 === "" || num2 === 0) {
+            operator = add;
+            isNum2 = true;
+            isComplete = true;
           } else if (num2 !== "" || num2 !== 0) {
             num2 = parseFloat(num2);
             let answer = operate(operator, num1, num2);
             calDisplay.textContent = answer;
+            currentIndex = answer;
             num1 = parseFloat(answer);
             num2 = "";
             operator = add;
@@ -111,11 +118,16 @@ buttons.forEach((button) => {
           highlightBtn(button);
 
           if (num1 === "" || num1 === null) {
-            num1 = parseFloat(calDisplay.textContent) || 0;
+            num1 = parseFloat(currentIndex) || 0;
+          } else if (num2 === "" || num2 === 0) {
+            operator = subtract;
+            isNum2 = true;
+            isComplete = true;
           } else if (num2 !== "" || num2 !== 0) {
             num2 = parseFloat(num2);
             let answer = operate(operator, num1, num2);
             calDisplay.textContent = answer;
+            currentIndex = answer;
             num1 = parseFloat(answer);
             num2 = "";
             operator = subtract;
@@ -132,11 +144,16 @@ buttons.forEach((button) => {
           highlightBtn(button);
 
           if (num1 === "" || num1 === null) {
-            num1 = parseFloat(calDisplay.textContent) || 0;
+            num1 = parseFloat(currentIndex) || 0;
+          } else if (num2 === "" || num2 === 0) {
+            operator = multiply;
+            isNum2 = true;
+            isComplete = true;
           } else if (num2 !== "" || num2 !== 0) {
             num2 = parseFloat(num2);
             let answer = operate(operator, num1, num2);
             calDisplay.textContent = answer;
+            currentIndex = answer;
             num1 = parseFloat(answer);
             num2 = "";
             operator = multiply;
@@ -153,7 +170,11 @@ buttons.forEach((button) => {
           highlightBtn(button);
 
           if (num1 === "" || num1 === null) {
-            num1 = parseFloat(calDisplay.textContent) || 0;
+            num1 = parseFloat(currentIndex) || 0;
+            operator = divide;
+            isNum2 = true;
+            isComplete = true;
+          } else if (num2 === "" || num2 === 0) {
             operator = divide;
             isNum2 = true;
             isComplete = true;
@@ -193,6 +214,7 @@ buttons.forEach((button) => {
         num2 = parseFloat(num2);
         let answer = operate(operator, num1, num2);
         calDisplay.textContent = answer;
+        currentIndex = answer;
         num1 = "";
         num2 = "";
         operator = "";
@@ -205,6 +227,7 @@ buttons.forEach((button) => {
     button.addEventListener("click", () => {
       removeHighlightedBtn();
       calDisplay.textContent = "";
+      currentIndex = "";
       num1 = "";
       num2 = "";
       operator = "";
@@ -217,6 +240,9 @@ buttons.forEach((button) => {
 
         num2 = num2.slice(0, -1);
         calDisplay.textContent = num2;
+      } else {
+        currentIndex = currentIndex.slice(0, -1);
+        calDisplay.textContent = currentIndex;
       }
       // let number = calDisplay.textContent;
       // let newNum = number.slice(0, -1);
